@@ -1,7 +1,7 @@
-youtube_resolver-php
+YouTube Resolver
 ====================
 
-Created by CurosMJ from HackForums.net (curosmj@gmail.com)
+Created by CurosMJ (curosmj@gmail.com)
 
 YouTube Resolver is a PHP Class that can :
 
