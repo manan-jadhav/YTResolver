@@ -1,7 +1,6 @@
 <?php
 include('youtuberesolver.class.php');
-$YTObj = new YouTubeResolver
-$YTObj->getData($_GET['id']);// Provide the function getData() with video id.
-echo $YTObj->data['title'].'<br>'.;
-echo $YTObj->data['duration'];
+$YTObj = new YouTubeResolverClass;
+$YTObj->get_data($_GET['id']);// Provide the function getData() with video id.
+print_r($YTObj->data);
 ?>
