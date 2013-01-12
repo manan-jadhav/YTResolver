@@ -292,7 +292,7 @@ class YouTubeResolverClass
         $this->status[]=__METHOD__." : Video ID extracted successfully.";
         return $this->metadata['vid'];
     }
-    public function search_key($haystack,$needle)
+    public function search_streams($haystack,$needle)
     {
         $this->count=$this->metadata['numstreams'];
         while($this->count)
