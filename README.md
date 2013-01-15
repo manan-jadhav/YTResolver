@@ -3,7 +3,7 @@ YTResolver
 
 Created by CurosMJ (curosmj@gmail.com)
 
-Please read LICENSE before using.
+Please read LICENSE and wiki before using.
 
 
 YTResolver is a PHP Class that can :
