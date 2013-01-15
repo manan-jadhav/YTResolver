@@ -1,7 +1,7 @@
 <?php
 class YouTubeResolverClass
 {
-    public $data,$status,$video_id,$stream_data,$search_results;
+    public $data,$status,$video_id,$stream_data;
     protected $prodata,$rawdata,$streams,$stream,$ch,$rcount,$count,$vurl_exp,$headers,$value;
     public function get_data($video_id)
     {
@@ -10,6 +10,7 @@ class YouTubeResolverClass
             $this->status[]=__METHOD__." : Video ID not set properly";
             return false;
         }
+        else {$this->status[]=__METHOD__." : Video ID successfully acquired.";}
         $this->data['video_id']=$video_id;
         $this->ch=curl_init('http://www.youtube.com/get_video_info?video_id='.$video_id);
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);//To get the raw data in a string, we must use this
@@ -281,7 +282,7 @@ class YouTubeResolverClass
             }
             $this->rcount++;
         }
-        $this->status[]=__METHOD__." : Successfully created links";
+        $this->status[]=__METHOD__." : Successfully created stream_data.";
         return true;
     }
     public function get_vid($vurl)
@@ -296,45 +297,18 @@ class YouTubeResolverClass
         $this->status[]=__METHOD__." : Video ID extracted successfully.";
         return $this->data['video_id'];
     }
-    public function search_streams($haystack,$needle,$index)
-    {
-        $this->count=$this->data['numstreams'];
-        while($this->count)
-        {
-            if($this->stream_data[$this->count][$haystack]==$needle)
-            {
-                $this->status[]=__METHOD__." : Successfully found the Key with ".$haystack." as ".$needle;
-                $this->search_pre_results[]=$this->count;
-            }
-            $this->count--;
-        }
-        if(!empty($this->search_results))
-        {
-        	if(isset($index)) 
-        	{
-        		foreach $this->search_pre_results  as $key=>$value
-        		{
-        			foreach $index as $keyin=>$valuein
-        			{
-        				if ($valuein===$value)
-        				{$this->search_results[]=$value;return TRUE;}
-        			}
-        		}
-        	}
-            return true;
-        }
-        $this->status[]=__METHOD__." : Failure in finding Key with ".$haystack." as ".$needle;
-        return false;
-    }
     public function stream_video($key)
     {
-        $this->headers=get_headers($this->stream_data[$key]['url']);//Get headers from YouTube
+       if($this->headers=get_headers($this->stream_data[$key]['url']))//Get headers from YouTube
+        $this->status[]=__METHOD__." : Successfully got headers from YouTube.";
         foreach ($this->headers as $this->value)//For sending each and every header
         {
-            header($this->value);
+            if(header($this->value))
+           $this->status[]=__METHOD__." : Successfully sent header.";  
         }
         $this->ch=curl_init($this->stream_data[$key]['url']);//Initialize cURL
-        curl_exec($this->ch);
+        if(curl_exec($this->ch))
+        $this->status[]=__METHOD__." : Successful stream output.";
         curl_close($this->ch);
     }
 }
