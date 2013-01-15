@@ -1,13 +1,12 @@
-YouTube Resolver
+YTResolver
 ====================
 
 Created by CurosMJ (curosmj@gmail.com)
 
 Please read LICENSE before using.
 
-Original Icon By http://dakirby309.deviantart.com/, Edited by myself.
 
-YouTube Resolver is a PHP Class that can :
+YTResolver is a PHP Class that can :
 
 1. Collect and Parse all the important data of a YouTube Video using only Video ID or Video URL as an input with smart error reporting.
 2. Stream/Download/Send a YouTube video in all available formats to client browser/multimedia application/downloader .
